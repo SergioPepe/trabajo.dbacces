@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import TeacherTable from './components/TeacherTable'
 
-function App() {
+const App = () => {
+
+  const teachersData = [
+    { id: 1, name: 'Tania', lastname: 'floppydiskette', inicio: "16:00:00" , finalizacion: "18:00:00"},
+    { id: 2, name: 'Craig', lastname: 'siliconeidolon', inicio: "12:00:00" , finalizacion: "14:00:00" },
+    { id: 3, name: 'Ben', lastname: 'benisphere', inicio: "10:00:00" , finalizacion: "12:00:00" },
+  ]
+
+  const [teachers, setteachers] = useState(teachersData)
+
+  const addTeacher = (teacher) => {
+    teacher.id = teachers.length + 1
+    setteachers([...teachers, teacher])
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>CRUD Teacher</h1>
+      <div className="flex-row">
+        <div className="flex-large">
+          <h2>Form teacher</h2>
+        </div>
+        <div className="flex-large">
+          <h2>List teachers</h2>
+          <TeacherTable teachers={teachers} />
+        </div>
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
